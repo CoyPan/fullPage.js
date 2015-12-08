@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="js/jquery-1.11.3.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="fullPage" page-id='page-one' inView="func1()"></div>
+    <div class="fullPage" page-id='page-two' inView="func2()"></div>
+    <div class="fullPage" page-id='page-three' inView="func3()"></div>
+
+    <script type="text/javascript">
+      function func1(){
+        alert(1);
+      }
+      function func2(){
+        alert(2);
+      }
+      function func3(){
+        alert(3);
+      }
+    </script>
+    <script src="js/fullPage.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      fullPage.init();
+    </script>
+  </body>
+</html>
