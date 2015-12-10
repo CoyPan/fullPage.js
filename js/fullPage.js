@@ -62,8 +62,22 @@
 
     /* function to run when the pages first onloaded */
     function pagesOnload(){
-      var func_to_run = $(".fullPage").eq(0).attr("inView");
-      strTofunc(func_to_run);
+      var start_hash=location.hash;
+      if(!start_hash){ /* the url has no hash . run the callback function of the first page */
+        var callback = $(".fullPage").eq(0).attr("inView");
+        strTofunc(callback);
+      }
+      /* if the url has hash , locate to the page */
+      var selector="[page-id='"+start_hash.substr(1,start_hash.length)+"']";
+      var slide_to=$(selector);
+      var index_to=slide_to.index();
+      var page_height=slide_to.height();
+      $(".fullPage-Container").animate({top:(_index-index_to)*page_height+"px"},"normal","swing",function(){
+        _index=index_to;
+        location.hash=$(".fullPage").eq(_index).attr("page-id");
+        var callback = $(".fullPage").eq(_index).attr("inView");
+        strTofunc(callback);
+      });
     }
 
     /* if reach boundary */
@@ -85,9 +99,9 @@
       var pre_top=parseInt($(".fullPage-Container").css("top"));
       _index-=arg;
       var callback=$(".fullPage").eq(_index).attr("inView");
-      //console.log(callback);
-      return $(".fullPage-Container").animate({top:pre_top+arg*page_height+"px"},"normal","swing",function(){
+      return $(".fullPage-Container").animate({top:pre_top+arg*page_height+"px"},400,"swing",function(){
         strTofunc(callback);
+        location.hash=$(".fullPage").eq(_index).attr("page-id");
       });
     }
 
