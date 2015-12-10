@@ -5,10 +5,12 @@
     <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-    <div id="page1" class="fullPage" page-id='page-one' inView="func1()"></div>
-    <div id="page2" class="fullPage" page-id='page-two' inView="func2()"></div>
-    <div id="page3" class="fullPage" page-id='page-three' inView="func3()"></div>
-
+    <div class="fullPage-Container">
+      <div id="page1" class="fullPage" page-id='page-one' inView="func1"></div>
+      <div id="page2" class="fullPage" page-id='page-two' inView="func2"></div>
+      <div id="page3" class="fullPage" page-id='page-three' inView="func3"></div>
+      <div id="page4" class="fullPage" page-id='page-four' inView="func4"></div>
+    </div>
     <script type="text/javascript">
       function func1(){
         alert(1);
@@ -18,6 +20,9 @@
       }
       function func3(){
         alert(3);
+      }
+      function func4(){
+        alert(4);
       }
     </script>
     <script src="js/fullPage.js" charset="utf-8"></script>

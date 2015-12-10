@@ -5,7 +5,23 @@
         _num=$(".fullPage").length || 0, // number of screens to slide
         _index=0; // the index of div onView;
 
-    /* set the style for the body and div */
+    /* function to set size for per page */
+    function setSizeForPages(){
+      var screen_height=$(window).height();
+      $(".fullPage").css({
+        "position":"relative",
+        "height":screen_height+"px",
+        "width":"100%",
+      });
+      $(".fullPage-Container").css({
+        "width":"100%",
+        "position":"relative",
+        "height":_num*screen_height+"px",
+        "top":-_index*screen_height+"px"
+      });
+    }
+
+    /* set the style for the whole page */
     function init(){
       $("html").css({
         "width":"100%",
@@ -20,12 +36,8 @@
         "margin":"0px",
         "padding":"0px"
       });
-      $(".fullPage").css({
-        "position":"relative",
-        "height":"100%",
-        "width":"100%",
-        "top":"0px"
-      });
+      setSizeForPages();
+      $(window).resize(setSizeForPages);
     }
 
     /* listen the scroll */
@@ -38,6 +50,27 @@
       document.onmousewheel=controlFunc;//Safari，Chrome
     }
 
+    /* change the str to a function name. every function can only run once */
+    function strTofunc(str){
+      if(document.getElementById(str)){
+        return false;
+      }
+      var script=$("<script text='text/javascript' id="+str+"></script>");
+      script.html(str+"()");
+      script.appendTo($("body"));
+    }
+
+    /* function to run when the pages first onloaded */
+    function pagesOnload(){
+      var func_to_run = $(".fullPage").eq(0).attr("inView");
+      strTofunc(func_to_run);
+    }
+
+    /* if reach boundary */
+    function isReachBoundary(arg){
+      return (_index === 0 && arg === 1) || (_index === _num-1 && arg === -1);
+    }
+
     /*
       function to control the pages to slide
       arg: 1 | -1
@@ -45,26 +78,27 @@
       -1 ----slide down
     */
     function pageSlide(arg){
-      if((_index === 0 && arg === -1) || (_index === _num-1 && arg === 1) ){ /* stop sliding when reach boundary */
+      if(isReachBoundary(arg)){
         return false;
       }
-      var pages_list=$(".fullPage");
-      var pages_height=$(".fullPage").eq(0).height();
-      for(var i=0,len=pages_list.length;i<len;i++){
-        var pre_top=pages_list.eq(i).css("top");
-        pages_list.eq(i).animate({top:parseInt(pre_top)-arg*pages_height},"normal","swing");
-      }
-      _index+=arg;
+      var page_height=$(".fullPage").eq(0).height();
+      var pre_top=parseInt($(".fullPage-Container").css("top"));
+      _index-=arg;
+      var callback=$(".fullPage").eq(_index).attr("inView");
+      //console.log(callback);
+      return $(".fullPage-Container").animate({top:pre_top+arg*page_height+"px"},"normal","swing",function(){
+        strTofunc(callback);
+      });
     }
 
-    /* main function to control the page to slide */
+    /* main function to control the pages to slide */
     function controlFunc(ev){
       if(new Date().getTime() < _start + _duration){/* avoid the mistakes caused by scrolling too fast */
         return false;
       }
       var e = ev || window.event;
         _start=new Date().getTime();
-      if( e.wheelDelta){//非FireFox
+      if(e.wheelDelta){//非FireFox
         if(e.wheelDelta>0){//up
           pageSlide(1);
         }else{//down
@@ -84,6 +118,7 @@
       if($(".fullPage")){
         init();
         listenScroll();
+        pagesOnload();
       }
     }
     go();
