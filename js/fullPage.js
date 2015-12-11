@@ -43,12 +43,27 @@
     /* listen the scroll */
     function listenScroll(){
       if(document.attachEvent){//IE
-        document.attachEvent("onmousewheel",controlFunc,false);
+        document.attachEvent("onmousewheel",controlFuncForScroll,false);
       }else if (document.addEventListener){//FireFox
-        document.addEventListener("DOMMouseScroll",controlFunc,false);
+        document.addEventListener("DOMMouseScroll",controlFuncForScroll,false);
       }
-      document.onmousewheel=controlFunc;//Safari，Chrome
+      document.onmousewheel=controlFuncForScroll;//Safari，Chrome
     }
+	
+	/* listen the keyboard*/
+	function listenKeyboard(){
+		document.onkeydown=function(event){
+			var ev = event || window.event;
+			if ( ev && ev.preventDefault ){
+				ev.preventDefault(); 
+			}
+			else{
+				window.event.returnValue = false; 
+			}
+			controlFuncForKeyboard(ev.keyCode);
+		}
+	}
+	
 
     /* change the str to a function name. every function can only run once */
     function strTofunc(str){
@@ -66,7 +81,7 @@
       if(!start_hash){ /* the url has no hash . run the callback function of the first page */
         var callback = $(".fullPage").eq(0).attr("inView");
         strTofunc(callback);
-        return false;
+		return false;
       }
       /* if the url has hash , locate to the page */
       var selector="[page-id='"+start_hash.substr(1,start_hash.length)+"']";
@@ -81,7 +96,7 @@
       });
     }
 
-    /* is reach boundary */
+    /* if reach boundary */
     function isReachBoundary(arg){
       return (_index === 0 && arg === 1) || (_index === _num-1 && arg === -1);
     }
@@ -106,8 +121,8 @@
       });
     }
 
-    /* main function to control the pages to slide */
-    function controlFunc(ev){
+    /* main function to control the pages to slide when scroll the mouse*/
+    function controlFuncForScroll(ev){
       if(new Date().getTime() < _start + _duration){/* avoid the mistakes caused by scrolling too fast */
         return false;
       }
@@ -127,12 +142,36 @@
         }
       }
     }
+	
+	/* main function to control the pages to slide when the keyboard is pressed*/
+	function controlFuncForKeyboard(keyCode){
+		if(new Date().getTime() < _start + _duration){/* avoid the mistakes caused by scrolling too fast */
+			return false;
+		}
+		 _start=new Date().getTime();
+		switch(keyCode){
+			case 37://up
+				pageSlide(1);
+				break;
+			case 38://up
+				pageSlide(1);
+				break;
+			case 39://down
+				pageSlide(-1);
+				break;
+			case 40://down
+				pageSlide(-1);
+				break;
+			default:;
+		}
+	}
 
     /* exec function */
     function go(){
       if($(".fullPage")){
         init();
         listenScroll();
+		listenKeyboard();
         pagesOnload();
       }
     }
