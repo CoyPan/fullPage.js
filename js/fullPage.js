@@ -66,6 +66,7 @@
       if(!start_hash){ /* the url has no hash . run the callback function of the first page */
         var callback = $(".fullPage").eq(0).attr("inView");
         strTofunc(callback);
+        return false;
       }
       /* if the url has hash , locate to the page */
       var selector="[page-id='"+start_hash.substr(1,start_hash.length)+"']";
