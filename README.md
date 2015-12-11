@@ -1,7 +1,7 @@
 # fullPage.js
 **v 0.1**
 ### 简介
-一个帮助实现整屏页面竖直上下切换效果的小工具。
+一个帮助实现整屏页面竖直上下切换效果的小工具。使用鼠标滚轮或者键盘方向键进行页面的切换。
 ###使用方法
     <div class="fullPage-Container">
       <div id="page1" class="fullPage" page-id='page-one' inView="func1">1</div>
