@@ -81,7 +81,7 @@
       });
     }
 
-    /* if reach boundary */
+    /* is reach boundary */
     function isReachBoundary(arg){
       return (_index === 0 && arg === 1) || (_index === _num-1 && arg === -1);
     }
