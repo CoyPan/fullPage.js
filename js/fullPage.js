@@ -66,6 +66,9 @@
 
     /* change the str to a function name. every function can only run once */
     function strTofunc(str){
+      if(/^\s*$/.test(str)){
+        return false;
+      }
       if(document.getElementById(str)){
         return false;
       }
