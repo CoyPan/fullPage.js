@@ -74,7 +74,7 @@
       }
       var script=$("<script text='text/javascript' id="+str+"></script>");
       script.html(str+"()");
-      script.appendTo($("body"));
+      script.appendTo($("html"));
     }
 
     /*  locate to the page accroding to the hash */
