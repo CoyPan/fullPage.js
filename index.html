@@ -6,11 +6,13 @@
   </head>
   <body>
     <div class="fullPage-Container">
-      <div id="page1" class="fullPage" page-id='page-one' inView="func1"></div>
-      <div id="page2" class="fullPage" page-id='page-two' inView="func2"></div>
-      <div id="page3" class="fullPage" page-id='page-three' inView="func3"></div>
-      <div id="page4" class="fullPage" page-id='page-four' inView="func4"></div>
+      <div id="page1" class="fullPage" page-id='page_one'></div>
+      <div id="page2" class="fullPage" page-id='page_two'></div>
+      <div id="page3" class="fullPage" page-id='page_three'></div>
+      <div id="page4" class="fullPage" page-id='page_four'></div>
+      <div id="page5" class="fullPage" page-id='page_for'></div>
     </div>
+    <script src="js/sfullPage.js" charset="utf-8"></script>
     <script type="text/javascript">
       function func1(){
         console.log(1);
@@ -19,12 +21,26 @@
         console.log(2);
       }
       function func3(){
-        console.log(3);
+        alert(3);
       }
       function func4(){
         console.log(4);
       }
+
+      var ss = new sFullpage({
+        duration:500,
+        callback:{
+          "page_two":func2,
+          "page_one":func1,
+          "page_three":func3,
+          "page_four":func4
+        }
+      });
+      ss.init();
     </script>
-    <script src="js/fullPage.js" charset="utf-8"></script>
+    <!--
+      <script src="js/fullPage-old.js" charset="utf-8"></script>
+    -->
+
   </body>
 </html>
