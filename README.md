@@ -59,6 +59,63 @@
 * 代码太烂
 * 使用Mac触摸板滑动会出现一次跳两页的情况
 
+___
+#sFullpage.js
+**v 0.2**
 
-  
+update : 去掉了对jQuery的依赖，全部使用原生JS编写。更新了使用方法。
+
+###HTML部分
+	<div class="fullPage-Container">
+      <div id="page1" class="fullPage" page-id='page_one'></div>
+      <div id="page2" class="fullPage" page-id='page_two'></div>
+      <div id="page3" class="fullPage" page-id='page_three'></div>
+      <div id="page4" class="fullPage" page-id='page_four'></div>
+      <div id="page5" class="fullPage" page-id='page_for'></div>
+    </div>
+
+###JS部分
+	<script src="js/sFullpage.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    
+      function func1(){
+        console.log(1);
+      }
+      function func2(){
+        console.log(2);
+      }
+      function func3(){
+        alert(3);
+      }
+      function func4(){
+        console.log(4);
+      }
+
+      var ss = new sFullpage({
+        duration:500,
+        callback:{
+          "page_two":func2,
+          "page_one":func1,
+          "page_three":func3,
+          "page_four":func4
+        }
+      });
+      ss.init();
+    </script>
+
+
+
+在HTML后面引用sFullpage.js。回调函数声明完成后，实例化一个sFullpage。使用一个对象来完成配置。
+
+* duration:页面切换时间。
+
+* callback:对象。page-id与对调函数相对应。
+
+需要改进的地方：
+
+* 没有支持移动端。
+* 目前只支持一种页面切换动画。且动画略有卡顿。
+* 使用Mac触摸板滑动会出现一次跳两页的情况。
+* 代码太烂。
+
   
