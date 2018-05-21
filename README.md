@@ -2,7 +2,7 @@
 **v 0.1**
 ### 简介
 一个帮助实现整屏页面竖直上下切换效果的小工具。使用鼠标滚轮或者键盘方向键进行页面的切换。
-###使用方法
+### 使用方法
 
 ```
 <div class="fullPage-Container">
@@ -25,11 +25,11 @@
 * 所有的页面需要用一个外层的class属性为『fullPage-Container』的div标签包裹。
 
 ---------
-###一个例子
-######index.html代码如下:
+### 一个例子
+###### index.html代码如下:
 
 ```
-<div class="fullPage-Container">
+    <div class="fullPage-Container">
 
       <div id="page1" class="fullPage" page-id='page-one' inView="func1"></div>
 
@@ -75,9 +75,9 @@
 
 
 
-######css代码如下:
+###### css代码如下:
 ```
- 	  #page1{
+     #page1 {
 
         background-color: rgba(150,217,255,1);
 
@@ -103,18 +103,18 @@
 ```
 
 --------
-###需要改进的地方
+### 需要改进的地方
 * 没有适配移动端
 * 代码太烂
 * 使用Mac触摸板滑动会出现一次跳两页的情况
 
 ___
-#sFullpage.js
+# sFullpage.js
 **v 0.2**
 
 update : 去掉了对jQuery的依赖，全部使用原生JS编写。更新了使用方法。
 
-###HTML部分
+### HTML部分
 
 ```
 
@@ -136,14 +136,14 @@ update : 去掉了对jQuery的依赖，全部使用原生JS编写。更新了使
 
 
 
-###JS部分
+### JS部分
 
 ```
 <script src="js/sFullpage.min.js" charset="utf-8"></script>
 
- <script type="text/javascript">
+<script type="text/javascript">
 
-      function func1(){
+  function func1(){
 
     console.log(1);
 
