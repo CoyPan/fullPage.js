@@ -3,12 +3,17 @@
 ### 简介
 一个帮助实现整屏页面竖直上下切换效果的小工具。使用鼠标滚轮或者键盘方向键进行页面的切换。
 ###使用方法
+
+
+`
     <div class="fullPage-Container">
       <div id="page1" class="fullPage" page-id='page-one' inView="func1">1</div>
       <div id="page2" class="fullPage" page-id='page-two' inView="func2">2</div>
       <div id="page3" class="fullPage" page-id='page-three' inView="func3">3</div>
       <div id="page4" class="fullPage" page-id='page-four' inView="func4">4</div>
     </div>
+ `
+
 
 * 引用jQuery,在HTML页面的底部调用fullPage.js。
 * 每一页均使用class属性为『fullPage』的div标签表示。
@@ -18,6 +23,8 @@
 ---------
 ###一个例子
 ######index.html代码如下:
+
+`
     <div class="fullPage-Container">
       <div id="page1" class="fullPage" page-id='page-one' inView="func1"></div>
       <div id="page2" class="fullPage" page-id='page-two' inView="func2"></div>
@@ -52,6 +59,7 @@
       #page4{
         background-color: rgba(222, 222, 222, 1);
       }
+`
 
 --------
 ###需要改进的地方
@@ -66,6 +74,8 @@ ___
 update : 去掉了对jQuery的依赖，全部使用原生JS编写。更新了使用方法。
 
 ###HTML部分
+
+`
 	<div class="fullPage-Container">
       <div id="page1" class="fullPage" page-id='page_one'></div>
       <div id="page2" class="fullPage" page-id='page_two'></div>
@@ -73,9 +83,12 @@ update : 去掉了对jQuery的依赖，全部使用原生JS编写。更新了使
       <div id="page4" class="fullPage" page-id='page_four'></div>
       <div id="page5" class="fullPage" page-id='page_for'></div>
     </div>
+`
 
 ###JS部分
-	<script src="js/sFullpage.min.js" charset="utf-8"></script>
+
+`
+    <script src="js/sFullpage.min.js" charset="utf-8"></script>
     <script type="text/javascript">
     
       function func1(){
@@ -103,6 +116,7 @@ update : 去掉了对jQuery的依赖，全部使用原生JS编写。更新了使
       ss.init();
     </script>
 
+`
 
 
 在HTML后面引用sFullpage.js。回调函数声明完成后，实例化一个sFullpage。使用一个对象来完成配置。
